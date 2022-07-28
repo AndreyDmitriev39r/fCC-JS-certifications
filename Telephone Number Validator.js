@@ -1,5 +1,15 @@
 function telephoneCheck(str) {
-  
+    /*regexp pseudocode
+  1. '1' >>> 0 or 1 occurance
+  2. space >>> 0 or 1 occurance
+  3. '(' >>> 0 or 1 occurance
+  4. digits >>> 3 occurances
+  5. ')' >>> 0 or 1 occurance
+  6. space or hyphen >>> 0 or 1 occurance
+  7. digits >>> 3 occurances
+  8. space or hyphen >>> 0 or 1 occurance
+  9. digits >>> 4 occurances
+  */
 }
 
 

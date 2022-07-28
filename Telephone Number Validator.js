@@ -1,14 +1,24 @@
 function telephoneCheck(str) {
-    /*regexp pseudocode
-  1. '1' >>> 0 or 1 occurance
-  2. space >>> 0 or 1 occurance
-  3. '(' >>> 0 or 1 occurance
-  4. digits >>> 3 occurances
-  5. ')' >>> 0 or 1 occurance
-  6. space or hyphen >>> 0 or 1 occurance
-  7. digits >>> 3 occurances
-  8. space or hyphen >>> 0 or 1 occurance
-  9. digits >>> 4 occurances
+  /*pseudocode
+  1. start pattern:
+  '1' 
+  or '1 ' 
+  or ''
+  
+  2. 2nd block
+  3 digits 
+  or 3 digits in parenthesis
+  or 3 digits followed by hyphen
+  or 3 digits followed by space
+  or 3 digits in parenthesis followed by space
+  
+  3. 3rd block
+  3 digits
+  or 3 digits followed by hyphen
+  or 3 digits followed by space
+  
+  4. 4thblock/end pattern
+  4 digits
   */
 }
 

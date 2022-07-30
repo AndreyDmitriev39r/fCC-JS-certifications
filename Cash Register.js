@@ -31,32 +31,39 @@ return cid.reduce((total, current) => rounding(total + current[1])  , 0)
   1.01 1.01
   0.5 0.5
   */
-  
-  const provideChangeInUnits = (change, cid) => {
+
+
+const provideChangeInUnits = (change, cid) => {
     
     const Nominals = [0.01, 0.05, 0.1, 0.25, 1, 5, 10, 20, 100];
     let changeInUnits = [];
     
-    for (let index = Nominals.length - 1; index >= 0; index--) {
+    for (let i = Nominals.length - 1; i >= 0; i--) {
       
-      let currNom = Nominals[index];
       
-      if (change >= currNom) {
-        let valueToProvide = currNom * Math.floor(change / currNom);
-        changeInUnits.unshift(
-              [cid[index][0], valueToProvide]
-              );
-        change = (change - valueToProvide).toPrecision(3);
+      if (change >= Nominals[i]) {
+        console.log(cid[i][0], Nominals[i], change, cid[i][1]);
+        if (change >= cid[i][1]) {
+          changeInUnits.push([cid[i][0], cid[i][1]]);
+          change = rounding(change - cid[i][1]);
+        }
+        else if (change < cid[i][1]) {
+          let addFromNom = Nominals[i] * Math.floor(change / Nominals[i]);
+          changeInUnits.push([cid[i][0], addFromNom]);
+          change = rounding(change - addFromNom);
+        }
       }
       
-      if (change == 0) {break;}
+      if (change === 0) {
+        return [changeInUnits, change];
+      }
       
     }
     
     return [changeInUnits, change];
-  }
+}
 
-  /* UNIT TESTING */
+  /* UNIT TESTING 
 const changes = [0.5, 96.74, 0.5];
 
 const cids = [
@@ -69,9 +76,9 @@ for (let i = 0; i < changes.length; i++) {
   console.log(changes[i], cids[i]);
 }
   
+*/ 
   
-  
-  /*
+  /* MAIN UNIT
   input:
   price >>> purchase price
   cash >>> payment
@@ -104,7 +111,7 @@ for (let i = 0; i < changes.length; i++) {
     
     const changeInUnits = provideChangeInUnits(change, cid);
     
-    if (changeInUnits[1] !== '0.00') {
+    if (changeInUnits[1] !== 0) {
       return statusAndChange;
     }
     

@@ -35,6 +35,12 @@ const countFunds = (cid) => {
     if (change > totalFunds) {
       return statusAndChange;
     }
+    
+    if (change === totalFunds) {
+      statusAndChange.status = "CLOSED"
+      statusAndChange.change = cid;
+      return statusAndChange;
+    }
   }
   
   test1 = checkCashRegister(19.5, 20, 
@@ -50,5 +56,3 @@ const countFunds = (cid) => {
     ["ONE HUNDRED", 100]
     ]
     );
-    
-  console.log(test1);

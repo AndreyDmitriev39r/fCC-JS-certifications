@@ -1,14 +1,36 @@
-/*
-input: cash-in-drawer
-output: total funds in drawer
-*/
-const countFunds = (cid) => {
-    return cid.reduce((total, currentUnit) => {
-      let sumOfTwo = total + currentUnit[1];
-      return Number(sumOfTwo.toPrecision(3));
-    }, 0
-      );
+const rounding = (num) => {
+    return Math.round(num * 100) / 100;
   }
+  
+const countFunds = (cid) => {
+return cid.reduce((total, current) => rounding(total + current[1])  , 0)
+}
+  
+  
+  /* UNIT TESTING
+  
+  const testCases = [
+    [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]],
+    [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]],
+    [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]],
+    [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]
+    ]
+  
+  const expected = [335.41, 0.01, 1.01, 0.5];
+  
+  
+  for (let i = 0; i < testCases.length; i++) {
+    console.log(countFunds(testCases[i]), expected[i]);
+  }
+  
+  
+  Output:
+  
+  335.41 335.41
+  0.01 0.01
+  1.01 1.01
+  0.5 0.5
+  */
   
   const provideChangeInUnits = (change, cid) => {
     

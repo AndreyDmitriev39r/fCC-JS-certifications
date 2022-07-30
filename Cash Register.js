@@ -3,7 +3,7 @@ const rounding = (num) => {
 }
   
 const countFunds = (cid) => {
-return cid.reduce((total, current) => rounding(total + current[1])  , 0)
+    return cid.reduce((total, current) => rounding(total + current[1])  , 0)
 }
   
   
@@ -78,67 +78,45 @@ for (let i = 0; i < changes.length; i++) {
   
 */ 
   
-  /* MAIN UNIT
-  input:
-  price >>> purchase price
-  cash >>> payment
-  cid >>> cash-in-drawer
-  
-  output: Object
-  {
-  status: value(as string)
-  change: value(as array)
-  */
-  function checkCashRegister(price, cash, cid) {
-    
-    let statusAndChange = {
-      status: "INSUFFICIENT_FUNDS", 
-      change: []
-    };
-    
-    const change = rounding(cash - price);
-    const totalFunds = countFunds(cid);
-    
-    if (change > totalFunds) {
-      return statusAndChange;
-    }
-    
-    if (change === totalFunds) {
-      statusAndChange.status = "CLOSED"
-      statusAndChange.change = cid;
-      return statusAndChange;
-    }
-    
-    const changeInUnits = provideChangeInUnits(change, cid);
-    
-    if (changeInUnits[1] !== 0) {
-      return statusAndChange;
-    }
-    
-    statusAndChange.status = "OPEN";
-    statusAndChange.change = changeInUnits[0]
+/* MAIN UNIT
+input:
+price >>> purchase price
+cash >>> payment
+cid >>> cash-in-drawer
+
+output: Object
+{
+status: value(as string)
+change: value(as array)
+*/
+function checkCashRegister(price, cash, cid) {
+
+let statusAndChange = {
+    status: "INSUFFICIENT_FUNDS", 
+    change: []
+};
+
+const change = rounding(cash - price);
+const totalFunds = countFunds(cid);
+
+if (change > totalFunds) {
     return statusAndChange;
-  }
+}
+
+if (change === totalFunds) {
+    statusAndChange.status = "CLOSED"
+    statusAndChange.change = cid;
+    return statusAndChange;
+}
+
+const changeInUnits = provideChangeInUnits(change, cid);
+
+if (changeInUnits[1] !== 0) {
+    return statusAndChange;
+}
+
+statusAndChange.status = "OPEN";
+statusAndChange.change = changeInUnits[0]
+return statusAndChange;
+}
   
-  test1 = checkCashRegister(19.5, 20, 
-  [
-    ["PENNY", 1.01], 
-    ["NICKEL", 2.05], 
-    ["DIME", 3.1], 
-    ["QUARTER", 4.25], 
-    ["ONE", 90], 
-    ["FIVE", 55], 
-    ["TEN", 20], 
-    ["TWENTY", 60], 
-    ["ONE HUNDRED", 100]
-    ]
-    );
-  
-  test2 = checkCashRegister(19.5, 20, 
-  [
-    ["PENNY", 0.5], ["NICKEL", 0], 
-    ["DIME", 0], ["QUARTER", 0],
-    ["ONE", 0], ["FIVE", 0], ["TEN", 0], 
-    ["TWENTY", 0], ["ONE HUNDRED", 0]])
-  
-  console.log(test1);

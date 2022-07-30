@@ -1,6 +1,6 @@
 const rounding = (num) => {
     return Math.round(num * 100) / 100;
-  }
+}
   
 const countFunds = (cid) => {
 return cid.reduce((total, current) => rounding(total + current[1])  , 0)
@@ -55,6 +55,19 @@ return cid.reduce((total, current) => rounding(total + current[1])  , 0)
     
     return [changeInUnits, change];
   }
+
+  /* UNIT TESTING */
+const changes = [0.5, 96.74, 0.5];
+
+const cids = [
+    [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]],
+    [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]],
+    [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]
+    ]
+    
+for (let i = 0; i < changes.length; i++) {
+  console.log(changes[i], cids[i]);
+}
   
   
   
@@ -76,7 +89,7 @@ return cid.reduce((total, current) => rounding(total + current[1])  , 0)
       change: []
     };
     
-    const change = cash - price;
+    const change = rounding(cash - price);
     const totalFunds = countFunds(cid);
     
     if (change > totalFunds) {

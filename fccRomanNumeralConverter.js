@@ -27,7 +27,7 @@ function convertToRoman(num) {
           5: 'L',
           6: 'LX',
           7: 'LXX',
-          8: 'LXX',
+          8: 'LXXX',
           9: 'XC'
           
         },

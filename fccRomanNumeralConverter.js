@@ -57,7 +57,7 @@ function convertToRoman(num) {
         }
       }
 
-      formattedNumber = String(number).split("").reverse();//4321 >>> ['1', '2', '3', '4']
+      const formattedNumber = String(num).split("").reverse();//4321 >>> ['1', '2', '3', '4']
 
       return formattedNumber.map(
         (digit, index) => romanDictionary[index][digit]

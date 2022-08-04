@@ -64,3 +64,31 @@ function convertToRoman(num) {
         ).reverse().join('')
  
 }
+
+//TESTS
+
+const testCases = {
+  
+  'onedigit': [[2, 'II'], [3, 'III'], [4, 'IV'], [5, 'V'], [9, 'IX']],
+  
+  'twodigit': [[12, 'XII'], [16, 'XVI'], [29, 'XXIX'], [44, 'XLIV'], [45, 'XLV']
+                , [68, 'LXVIII'], [83, 'LXXXIII'], [97, 'XCVII'], [99, 'XCIX']],
+                
+  'threedigit': [[400, 'CD'], [500, 'D'], [501, 'DI'], [649, 'DCXLIX'],
+                [798, 'DCCXCVIII'], [891, 'DCCCXCI']],
+  
+  'fourdigit' : [[1000, 'M'], [1004, 'MIV'], [1006, 'MVI'],
+                  [1023, 'MXXIII'], [2014, 'MMXIV'], [3999, 'MMMCMXCIX']]
+}
+
+for (let group in testCases) {
+  console.log('tests for ', group, ' numbers');
+  for (let testCase of testCases[group]) {
+    console.log('CASE: ', testCase[0]);
+    console.log('expected: ', testCase[1]);
+    console.log('fact: ', convertToRoman(testCase[0]));
+    console.log('----')
+  }
+  console.log('------------');
+}
+
